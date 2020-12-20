@@ -79,8 +79,8 @@ uppercase = 0
 numeric = 0
 spolu = {}
 suma_numeric = 0
-i = 0
-while i < len(slova):
+
+for i in range(len(slova)):
     if slova[i].istitle():
         titlecase += 1
     elif slova[i].isupper():
@@ -92,7 +92,7 @@ while i < len(slova):
         suma_numeric = suma_numeric + float(slova[i])
     mnozstvi = len(slova[i])
     spolu[mnozstvi] = spolu.get (mnozstvi, 0) + 1
-    i = i + 1
+
 print(f'There are {titlecase} titlecase words.')
 print(f'There are {uppercase} uppercase words.')
 print(f'There are {lowercase} lowercase words.')

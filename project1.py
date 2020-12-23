@@ -76,43 +76,43 @@ print(f'There are {(len(slova))} words in the selected text.')
 titlecase = 0
 lowercase = 0
 uppercase = 0
-numeric = 0
-spolu = {}
+numeric = []
 suma_numeric = 0
 
-for i in range(len(slova)):
-    if slova[i].istitle():
+for slovo in slova:
+    if slovo.istitle():
         titlecase += 1
-    elif slova[i].isupper():
+    elif slovo.islower():
+        lowercase +=1
+    elif slovo.isupper():
         uppercase += 1
-    elif slova[i].islower():
-        lowercase += 1
-    elif slova[i].isnumeric():
-        numeric += 1
-        suma_numeric = suma_numeric + float(slova[i])
-    mnozstvi = len(slova[i])
-    spolu[mnozstvi] = spolu.get (mnozstvi, 0) + 1
+    elif slovo.isnumeric():
+        numeric.append(slovo)
+
+for cislo in numeric:
+    if cislo.isdigit():
+        suma_numeric += int(cislo)
 
 print(f'There are {titlecase} titlecase words.')
 print(f'There are {uppercase} uppercase words.')
 print(f'There are {lowercase} lowercase words.')
-print(f'There are {numeric} numeric strings.')
+print(f'There are {len(numeric)} numeric strings.')
 print(ODDELOVAC)
 
 print(('BAR CHART OF WORDS LENGHTS ').center(50, ' '))
 print(ODDELOVAC)
 
-delky = sorted(spolu)
-i= 0
-while i < len(delky):
-    delka = delky[i]
-    frekvence = spolu[delka]
-    if len(str(delka)) == 1:
-        str_delka = ' ' + str(delka)
+spolu = {}
+for slovo in slova:
+    delka = len(slovo)
+    if delka not in spolu:
+        spolu[delka] = 1
     else:
-        str_delka = str(delka)
-    print(str_delka, '*' * frekvence, frekvence)
-    i += 1
+        spolu[delka] += 1
+sd = sorted(spolu.items())
+for sl, frekv in sd:
+    print(sl, ('*' * frekv), frekv)
+
 
 print('-' * 63)
 print(f'If we summed all the numbers in this text we would get: {suma_numeric}')
